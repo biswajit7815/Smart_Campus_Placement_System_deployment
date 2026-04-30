@@ -29,6 +29,7 @@ LABEL description="Production image for Node.js Application"
 ENV NODE_ENV=production
 WORKDIR /app
 
+
 # 1. Security: Create a non-root user and group
 RUN addgroup --system --gid 1001 nodejs && \
     adduser  --system --uid 1001 nodeuser
@@ -43,11 +44,11 @@ COPY --chown=nodeuser:nodejs . .
 USER nodeuser
 
 # 5. Networking: Expose the application port
-EXPOSE 5000
+EXPOSE 4000
 
 # 6. Reliability: Healthcheck configuration
 HEALTHCHECK --interval=30s --timeout=10s --start-period=30s --retries=3 \
-    CMD wget -qO- http://localhost:5000/ || exit 1
+    CMD wget -qO- http://localhost:4000/health || exit 1
 
 # 7. Execution: Start the server
 CMD ["node", "server.js"]

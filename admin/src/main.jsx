@@ -6,7 +6,8 @@ import "./index.css";
 
 createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <BrowserRouter>
+    {/* basename add karne se /admin automatically base path ban jayega */}
+    <BrowserRouter basename="/admin">
       <App />
     </BrowserRouter>
   </React.StrictMode>
